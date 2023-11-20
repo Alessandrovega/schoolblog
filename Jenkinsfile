@@ -2,23 +2,32 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') {
+
+        stage('Declarative: Too Install') {
             steps {
-                // Pasos de construcción
-                echo 'Building...'
+                script {
+                    // Coloca aquí los comandos para instalar dependencias
+                    echo 'Instalando dependencias...'
+                }
             }
         }
-    }
 
-    post {
-        success {
-            // Pasos a realizar en caso de éxito
-            echo 'Build successful!'
+        stage('Compile Stage') {
+            steps {
+                script {
+                    // Coloca aquí los comandos para compilar tu proyecto
+                    echo 'Compilando...'
+                }
+            }
         }
 
-        failure {
-            // Pasos a realizar en caso de fallo
-            echo 'Build failed!'
+        stage('Testing Stage') {
+            steps {
+                script {
+                    // Coloca aquí los comandos para ejecutar pruebas
+                    echo 'Ejecutando pruebas...'
+                }
+            }
         }
     }
 }
