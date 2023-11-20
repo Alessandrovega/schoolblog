@@ -30,10 +30,7 @@ public class Schedule {
     @Column(name = "start_time", nullable = false)
     private String startTime;
 
-    @NotNull
-    @NotBlank
-    @Column(name = "end_time", nullable = false)
-    private String endTime;
+
 
     @JsonIgnore
     @ManyToMany(mappedBy = "schedules")
