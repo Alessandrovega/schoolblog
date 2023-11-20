@@ -1,0 +1,47 @@
+server:
+  port: 8105
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG
+        type: TRACE
+# spring:
+#  datasource:
+#    password: password
+#    url: jdbc:mysql://localhost:3306/lc?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false
+#    username: root
+#  jpa:
+#    hibernate:
+#      ddl-auto: update
+#    properties:
+#      hibernate:
+#        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    #    JDBC : SGDB :// HOST : PORT / DB
+    url: jdbc:postgresql://localhost:5432/schoolblog
+    username: postgres
+    password: admin
+  jpa:
+    database: postgresql
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+documentation:
+  application:
+    description: @project.description@
+    version: @project.version@
+
+springdoc:
+  # /v3/api-docs endpoint  custom path:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui/index.html
