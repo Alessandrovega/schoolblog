@@ -23,7 +23,17 @@ pipeline {
                     // Imprime el contenido del archivo pom.xml
                     echo 'Contenido del pom.xml:'
                     sh 'cat pom.xml'
+
+                    // Intenta compilar el proyecto
                     echo 'Compilando...'
+                    try {
+                        // Coloca aquí los comandos para compilar tu proyecto
+                        sh 'tu_comando_de_compilacion'
+                    } catch (Exception e) {
+                        // Captura la excepción en caso de fallo de compilación
+                        currentBuild.result = 'FAILURE'
+                        error("Error durante la compilación: ${e.message}")
+                    }
                 }
             }
         }
@@ -33,6 +43,14 @@ pipeline {
                 script {
                     // Coloca aquí los comandos para ejecutar pruebas
                     echo 'Ejecutando pruebas...'
+                    try {
+                        // Coloca aquí los comandos para ejecutar pruebas
+                        sh 'tu_comando_de_pruebas'
+                    } catch (Exception e) {
+                        // Captura la excepción en caso de fallo en las pruebas
+                        currentBuild.result = 'FAILURE'
+                        error("Error durante la ejecución de pruebas: ${e.message}")
+                    }
                 }
             }
         }
@@ -52,5 +70,3 @@ pipeline {
         }
     }
 }
-
-
