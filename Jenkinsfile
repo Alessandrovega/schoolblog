@@ -2,7 +2,6 @@ pipeline {
     agent any
 
     stages {
-
         stage('Declarative: Too Install') {
             steps {
                 script {
@@ -16,8 +15,9 @@ pipeline {
         stage('Compile Stage') {
             steps {
                 script {
-                    // Coloca aquí los comandos para compilar tu proyecto
-                    sh 'cat pom.xml'
+                    // Imprime el contenido del archivo pom.xml
+                    echo 'Contenido del pom.xml:'
+                    sh 'cat pom.xml > pom_content.txt'
                     echo 'Compilando...'
                 }
             }
@@ -32,4 +32,19 @@ pipeline {
             }
         }
     }
+
+    post {
+        always {
+            // Archivo para almacenar el contenido del pom.xml
+            archiveArtifacts 'pom_content.txt'
+        }
+        success {
+            // Archivo para mostrar como un enlace en la interfaz de Jenkins
+            archiveArtifacts artifacts: 'pom_content.txt', allowEmptyArchive: true
+
+            // Publica un informe HTML en la interfaz de Jenkins
+            publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, reportDir: '.', reportFiles: 'pom_content.txt', reportName: 'Last Successful Artifacts'])
+        }
+    }
 }
+
