@@ -17,6 +17,7 @@ pipeline {
             steps {
                 script {
                     // Coloca aquí los comandos para compilar tu proyecto
+                    sh 'cat pom.xml'
                     echo 'Compilando...'
                 }
             }
