@@ -26,22 +26,9 @@ pipeline {
                 script {
                     // Coloca aquí los comandos para instalar dependencias
                     echo 'Instalando dependencias...'
+                    archiveArtifacts 'pom.xml'
                 }
             }
-        }
-    }
-
-    post {
-        always {
-            // Archivo para almacenar el contenido del pom.xml
-            archiveArtifacts 'pom.xml'
-        }
-        success {
-            // Archivo para mostrar como un enlace en la interfaz de Jenkins
-            archiveArtifacts artifacts: 'pom.xml', allowEmptyArchive: true
-
-            // Publica un informe HTML en la interfaz de Jenkins
-            publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, reportDir: '.', reportFiles: 'pom.xml', reportName: 'Last Successful Artifacts'])
         }
     }
 }
