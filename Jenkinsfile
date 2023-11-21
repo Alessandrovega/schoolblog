@@ -8,6 +8,7 @@ pipeline {
                 script {
                     // Coloca aquí los comandos para instalar dependencias
                     echo 'Instalando dependencias...'
+                    checkout scm
                 }
             }
         }
